@@ -4,6 +4,7 @@ import {} from 'react-router-dom';
 import AuthLayout from './layouts/auth';
 import AdminLayout from './layouts/admin';
 import RTLLayout from './layouts/rtl';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import {
   ChakraProvider,
   // extendTheme
@@ -22,13 +23,17 @@ export default function Main() {
         <Route
           path="admin/*"
           element={
-            <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+            <ProtectedRoute>
+              <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+            </ProtectedRoute>
           }
         />
         <Route
           path="rtl/*"
           element={
-            <RTLLayout theme={currentTheme} setTheme={setCurrentTheme} />
+            <ProtectedRoute>
+              <RTLLayout theme={currentTheme} setTheme={setCurrentTheme} />
+            </ProtectedRoute>
           }
         />
         <Route path="/" element={<Navigate to="/admin" replace />} />
